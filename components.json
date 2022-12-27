@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "name": "header",
+        "params": {
+            "text": "Hello world"
+        },
+        "hbs": "<h1> {{text}} </h1>",
+        "styles": "h1{color: red}"
+    },
+    {
+        "id": 2,
+        "name": "footer",
+        "params": "{\n  \"companyName\": \"ITSTEP\"\n}\n",
+        "hbs": "<div id=\"footer\">\n    <p>{{companyName}}</p>\n</div>",
+        "styles": "#footer{\nbackground-color: black;\ndisplay: flex;\nalign-item: center;\njustify-content:center;\nfont-size:20px;\ncolor: red\n}\n"
+    }
+]
