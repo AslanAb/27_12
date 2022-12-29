@@ -1,5 +1,6 @@
 const componentsDiv = document.querySelector("#components")
 const previewDiv = document.querySelector("#preview")
+const creatPageBtn = document.querySelector("#create_page_btn")
 
 const drawPreview = () => {
     let previewComponents = JSON.parse(localStorage.getItem("previewComponents")) || []
@@ -54,3 +55,28 @@ const deleteComponent = index => {
     localStorage.setItem("previewComponents", JSON.stringify(previewComponents))
     drawPreview()
 }
+
+creatPageBtn.addEventListener("click", () => {
+    let previewComponents = JSON.parse(localStorage.getItem("previewComponents")) || []
+    const pageName = document.querySelector("#page_name_input").value
+    const payload = {
+        pageName,
+        componentsIds: previewComponents.map(item => item.id)
+    }
+    fetch("http://localhost:8080/pages", {
+        method: "post",
+        headers: {
+            "Accept": "application/json",
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(() => {
+        alert("Страница создана успешно!")
+        localStorage.removeItem("previewComponents")
+        document.querySelector("#page_name_input").value = ''
+        drawPreview()
+    })
+        
+    .catch(() => alert("Error"))
+})
